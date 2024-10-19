@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluesky Video Downloader - Download Bluesky Video</title>
+    <meta name="description" content="Download Bluesky videos for free with our fast and easy-to-use Bluesky video downloader. No registration required. Save your favorite Bluesky content in high quality.">
+    <link rel="canonical" href="https://savebsky.com/">
+    <link rel="apple-touch-icon" sizes="180x180" href="site/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="site/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site/favicon-16x16.png">
+    <link rel="manifest" href="site/site.webmanifest">
+    <script src="static/tailwind.min.js"></script>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://savebsky.com/">
+    <meta property="og:title" content="Bluesky Video Downloader - Download Bluesky Video">
+    <meta property="og:description" content="Free online tool to save Bluesky videos in high quality. No registration required.">
+    <meta property="og:image" content="https://savebsky.com/static/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://savebsky.com/">
+    <meta property="twitter:title" content="Bluesky Video Downloader - Download Bluesky Video">
+    <meta property="twitter:description" content="Free online tool to save Bluesky videos in high quality. No registration required.">
+    <meta property="twitter:image" content="https://savebsky.com/static/twitter-image.jpg">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4HWPPGK5H0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-4HWPPGK5H0');
+    </script>
+  
+    <script src="static/jquery.min.js" defer></script>
+    <script src="static/script.js" defer></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Bluesky Video Downloader",
+      "url": "https://savebsky.com",
+      "description": "Free and fast Bluesky video downloader. No registration required.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1024"
+      },
+      "logo": "https://savebsky.com/static/logo.png"
+    }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-blue-500 to-purple-600 min-h-screen text-white">
+    <header class="container mx-auto px-4 py-8 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-2">Bluesky Video Downloader</h1>
+        <p class="text-xl opacity-75">Free online tool to download Bluesky video in high quality</p>
+    </header>
+
+    <main class="container mx-auto px-4">
+        <section id="downloader" class="max-w-3xl mx-auto mb-12 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg">
+            <form id="downloadForm" class="mb-6">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-grow flex rounded-lg overflow-hidden bg-white bg-opacity-20">
+                        <div class="relative">
+                            <select id="downloadType" name="downloadType" class="appearance-none bg-transparent text-white pl-4 pr-10 py-4 focus:outline-none focus:ring-0 text-lg cursor-pointer">
+                                <option value="video" class="bg-gray-800 text-white">video</option>
+                                <option value="audio" class="bg-gray-800 text-white">audio</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <input type="url" id="postUrl" name="postUrl" placeholder="Paste Bluesky Link" required
+                               class="flex-grow bg-transparent text-white p-4 focus:outline-none focus:ring-0 text-lg placeholder-white placeholder-opacity-75">
+                        <button type="button" id="pasteButton" aria-label="Paste URL" class="px-4 text-white opacity-75 hover:opacity-100 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="submit" class="bg-green-500 text-white font-bold py-4 px-8 rounded-lg hover:bg-green-600 transition duration-300">
+                        Download
+                    </button>
+                </div>
+            </form>
+            <div id="downloadStatus" class="text-center">
+                <p id="status" class="font-bold mb-4 text-xl"></p>
+                <div id="progressBar" class="hidden w-full bg-white bg-opacity-20 rounded-full h-4 mb-4">
+                    <div class="bg-green-500 h-4 rounded-full transition-all duration-300 ease-out" style="width: 0%"></div>
+                </div>
+                <img id="thumbnail" alt="Video thumbnail" class="max-w-full h-auto mx-auto mb-4 hidden rounded-lg shadow-lg">
+                <a id="downloadLink" href="#" class="hidden bg-blue-500 text-white text-center p-4 rounded-lg hover:bg-blue-600 transition duration-300 inline-block mb-8 text-lg font-semibold">
+                    Download Video
+                </a>
+            </div>
+        </section>
+
+        <section id="features" class="max-w-3xl mx-auto mb-12 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-center">Why Choose Our Bluesky Downloader?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <p>Fast and easy to use</p>
+                </div>
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <p>No registration required</p>
+                </div>
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <p>High-quality downloads</p>
+                </div>
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <p>100% Free, no hidden fees</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="howTo" class="max-w-3xl mx-auto mb-12 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-center">How to Download Bluesky Videos</h2>
+            <ol class="list-decimal list-inside space-y-4">
+                <li>Copy the URL of the Bluesky post with the video</li>
+                <li>Paste the URL into the input field above</li>
+                <li>Click "Download" and wait for processing</li>
+                <li>Click the blue "Download Video" button to save</li>
+            </ol>
+        </section>
+
+        <section id="about" class="max-w-3xl mx-auto mb-12 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-center">About SaveBsky</h2>
+            <p>SaveBsky is a free online tool dedicated to helping users download and save their favorite Bluesky videos. Our mission is to provide a fast, easy, and reliable way to preserve Bluesky content for offline viewing. With our user-friendly interface and high-quality downloads, we aim to be your go-to solution for Bluesky video downloads.</p>
+        </section>
+
+        <section id="faq" class="max-w-3xl mx-auto mb-12 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+            <div class="space-y-6">
+                <details id="faq-free">
+                    <summary class="text-xl font-semibold cursor-pointer">Is SaveBsky really free?</summary>
+                    <p class="mt-2">Yes, our Bluesky Video Downloader is 100% free. There are no hidden fees or subscriptions required to use our service.</p>
+                </details>
+                <details id="faq-account">
+                    <summary class="text-xl font-semibold cursor-pointer">Do I need a Bluesky account to use SaveBsky?</summary>
+                    <p class="mt-2">No, you don't need a Bluesky account to use our downloader. Simply paste the URL of the public Bluesky post containing the video you want to download.</p>
+                </details>
+                <details id="faq-quality">
+                    <summary class="text-xl font-semibold cursor-pointer">What video quality can I expect from SaveBsky downloads?</summary>
+                    <p class="mt-2">We always strive to provide the highest quality available from the original Bluesky post. The exact quality may vary depending on the source video, but we ensure you get the best possible version.</p>
+                </details>
+                <details id="faq-legal">
+                    <summary class="text-xl font-semibold cursor-pointer">Is it legal to download Bluesky videos?</summary>
+                    <p class="mt-2">Downloading videos for personal use is generally considered fair use. However, please respect copyright laws and the original content creators. Do not distribute or use downloaded videos for commercial purposes without permission.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container mx-auto text-center p-4 mt-8 opacity-75">
+        <p>&copy; 2024 SaveBsky - Bluesky Video Downloader. All rights reserved.</p>
+        <nav class="mt-4">
+            <a href="privacy.html" class="mx-2 hover:underline">Privacy Policy</a>
+            <a href="terms.html" class="mx-2 hover:underline">Terms of Service</a>
+            <a href="contact.html" class="mx-2 hover:underline">Contact Us</a>
+        </nav>
+    </footer>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Is SaveBsky really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, our Bluesky Video Downloader is 100% free. There are no hidden fees or subscriptions required to use our service."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Do I need a Bluesky account to use SaveBsky?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, you don't need a Bluesky account to use our downloader. Simply paste the URL of the public Bluesky post containing the video you want to download."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What video quality can I expect from SaveBsky downloads?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We always strive to provide the highest quality available from the original Bluesky post. The exact quality may vary depending on the source video, but we ensure you get the best possible version."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is it legal to download Bluesky videos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Downloading videos for personal use is generally considered fair use. However, please respect copyright laws and the original content creators. Do not distribute or use downloaded videos for commercial purposes without permission."
+        }
+      }]
+    }
+    </script>
+</body>
+</html>
