@@ -1,4 +1,36 @@
 $(document).ready(function() {
+    // Language switcher functionality
+    const $languageButton = $('#languageButton');
+    const $languageMenu = $('#languageMenu');
+    const $currentLanguage = $('#currentLanguage');
+
+    $languageButton.on('click', function(e) {
+        e.preventDefault();
+        $languageMenu.toggleClass('hidden show');
+    });
+
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest($languageButton).length && !$(e.target).closest($languageMenu).length) {
+            $languageMenu.removeClass('show').addClass('hidden');
+        }
+    });
+
+    const currentLang = window.location.pathname.split('/')[1] || 'en';
+    const $currentLangLink = $languageMenu.find(`a[href="/${currentLang}/"]`).length ? 
+                             $languageMenu.find(`a[href="/${currentLang}/"]`) : 
+                             $languageMenu.find('a[href="/"]');
+    
+    if ($currentLangLink.length) {
+        $currentLangLink.addClass('font-bold bg-gray-200');
+        $currentLanguage.text($currentLangLink.text());
+    }
+
+    $languageMenu.find('a').on('click', function(e) {
+        e.preventDefault();
+        window.location.href = $(this).attr('href');
+    });
+
+    // Bluesky video processing functionality
     async function processBlueskyVideo(postUrl, format, statusCallback, progressCallback) {
         try {
             statusCallback('Extracting post info...');
@@ -168,6 +200,8 @@ $(document).ready(function() {
         const $progressBarInner = $progressBar.find('div');
         const $thumbnail = $('#thumbnail');
 
+        console.log(format);
+
         $status.text('Processing...').css('color', '');
         $downloadLink.hide();
         $progressBar.hide();
@@ -202,7 +236,7 @@ $(document).ready(function() {
             $downloadLink.attr({
                 'href': url,
                 'download': filename
-            }).show();
+            }).css('display', 'block');
             
             $status.text('Video ready for download!');
         } catch (error) {
